@@ -2,6 +2,10 @@
 
 @section('title', 'Danh sách Sản phẩm')
 
+@section('css')
+<link rel="stylesheet" href="{{asset('template_admin/customs/product/lists/lists.css')}}">
+<link rel="stylesheet" href="{{asset('template_admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+@endsection
 @section('content')
     @include('admin.partials.content-header', ['name' => 'Sản Phẩm', 'key' => 'Danh Sách Sản Phẩm'])
 
@@ -50,16 +54,16 @@
                                         <tr>
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->name}}</td>
-                                            <td>{{$item->price}}</td>
+                                            <td>{{number_format($item->price)}}</td>
                                             <td>
-                                                <img src="" alt="">
+                                                <img class="product-image-thumb" src="{{asset($item->feature_image_path)}}" alt="{{$item->name}}">
                                             </td>
                                             <td>
-                                                danh mục
+                                                {{optional($item->category)->name}}
                                             </td>
                                             <td>
-                                                <a href="{{route('admin.menus.edit', ['id' => $item->id])}}" class="btn btn-warning">Sửa</a>
-                                                <a onclick="return confirm('Bạn có chắc chắn muốn xoá?');" href="{{route('admin.menus.delete', ['id' => $item->id])}}" class="btn btn-danger">Xoá</a>
+                                                <a href="{{route('admin.products.edit', ['id' => $item->id])}}" class="btn btn-warning">Sửa</a>
+                                                <a href="#" data-url="{{route('admin.products.delete', ['id' => $item->id])}}" class="btn btn-danger action_delete">Xoá</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -86,4 +90,9 @@
     </div>
     <!-- /.content -->
     </div>
+@endsection
+
+@section('js')
+<script src="{{asset('template_admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<script src="{{asset('template_admin/customs/product/lists/lists.js')}}"></script>
 @endsection

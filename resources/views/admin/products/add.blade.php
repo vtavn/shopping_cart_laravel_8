@@ -115,7 +115,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="contents">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" name="contents" id="contents" cols="10" rows="10"></textarea>
+                                            @error('contents')
+                                            <span style="color: red;">{{$message}}</span>
+                                            @enderror
+                                            <textarea class="form-control" name="contents" id="contents" cols="10" rows="10">{{old('contents')}}</textarea>
                                             <!-- /#content -->
                                         </div>
                                         <!-- /.form-group -->

@@ -1,7 +1,7 @@
 $(function (){
     $(".tags_select_choose").select2({
         tags: true,
-        tokenSeparators: [',', ' ']
+        tokenSeparators: [',']
     })
     $(".select2_parent_id").select2({
         placeholder: "Chọn Danh Mục",
