@@ -4,6 +4,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{asset('template_admin/plugins/select2/css/select2.min.css')}}" />
+<link rel="stylesheet" href="{{asset('template_admin/plugins/summernote/summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="{{asset('template_admin/customs/product/add/add.css')}}" />
 @endsection
 
@@ -31,12 +32,12 @@
                         <!-- /.card-header -->
                         <div class="card-body" style="display: block;">
 
-                            <form action="{{route('admin.menus.store')}}" method="post">
+                            <form action="{{route('admin.products.store')}}" enctype="multipart/form-data" method="post">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="name">Tên Menu</label>
-                                            <input type="text" name="name" id="name" class="form-control" value="{{old('name')}}" placeholder="Nhập tên menu...">
+                                            <label for="name">Tên Sản Phẩm</label>
+                                            <input type="text" name="name" id="name" class="form-control" value="{{old('name')}}" placeholder="Nhập tên sản phẩm...">
                                             @error('name')
                                             <span style="color: red;">{{$message}}</span>
                                             @enderror
@@ -71,13 +72,13 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="parent_id">Chọn Danh Mục</label>
-                                            <select name="parent_id" id="parent_id" class="form-control select2_parent_id" style="width: 100%;">
+                                            <label for="category_id">Chọn Danh Mục</label>
+                                            <select name="category_id" id="category_id" class="form-control select2_parent_id" style="width: 100%;">
                                                 <option value="">Chọn Danh Mục</option>
                                                 {!! $htmlOption !!}
                                             </select>
                                             <!-- /# -->
-                                            @error('parent_id')
+                                            @error('category_id')
                                             <span style="color: red;">{{$message}}</span>
                                             @enderror
                                         </div>
@@ -113,8 +114,8 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="content">Mô tả sản phẩm</label>
-                                            <textarea class="form-control" name="content" id="content" cols="10" rows="5"></textarea>
+                                            <label for="contents">Mô tả sản phẩm</label>
+                                            <textarea class="form-control" name="contents" id="contents" cols="10" rows="10"></textarea>
                                             <!-- /#content -->
                                         </div>
                                         <!-- /.form-group -->
@@ -149,5 +150,8 @@
 
 @section('js')
     <script src="{{asset('template_admin/plugins/select2/js/select2.full.min.js')}}"></script>
+{{--    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>--}}
+    <script src="{{asset('template_admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
     <script src="{{asset('template_admin/customs/product/add/add.js')}}"></script>
 @endsection
