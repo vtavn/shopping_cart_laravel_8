@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnImageNameToTableProductImage extends Migration
+class AddColumnDeletedAtToTableProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddColumnImageNameToTableProductImage extends Migration
      */
     public function up()
     {
-        Schema::table('product_images', function (Blueprint $table) {
-            $table->string('image_name')->after('image_path');
+        Schema::table('products', function (Blueprint $table) {
+            //
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +26,9 @@ class AddColumnImageNameToTableProductImage extends Migration
      */
     public function down()
     {
-        Schema::table('product_images', function (Blueprint $table) {
-            $table->dropColumn('image_name');
+        Schema::table('products', function (Blueprint $table) {
+            //
+            $table->dropColumn('deleted_at');
         });
     }
 }
