@@ -47,14 +47,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255|min:10',
             'contents' => 'required',
             'price' => 'required|integer',
         ],[
             'name.required' => 'Tên Sản phẩm bắt buộc phải nhập.',
+            'name.max' => 'Tên sản phẩm tối đa :max ký tự',
+            'name.min' => 'Tên sản phẩm tối thiểu :min ký tự',
+            'contents.required' => 'Mô tả sản phẩm không được để trống.',
             'price.required' => 'Giá sản phẩm không được để trống.',
-            'price.integer' => 'Giá sản phẩm không hợp lệ',
-            'contents.required' => 'Mô tả sản phẩm không được để trống.'
+            'price.integer' => 'Giá sản phẩm không hợp lệ'
         ]);
 
         try {
@@ -120,14 +122,16 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:255|min:10',
             'contents' => 'required',
             'price' => 'required|integer',
         ],[
             'name.required' => 'Tên Sản phẩm bắt buộc phải nhập.',
+            'name.max' => 'Tên sản phẩm tối đa :max ký tự',
+            'name.min' => 'Tên sản phẩm tối thiểu :min ký tự',
+            'contents.required' => 'Mô tả sản phẩm không được để trống.',
             'price.required' => 'Giá sản phẩm không được để trống.',
-            'price.integer' => 'Giá sản phẩm không hợp lệ',
-            'contents.required' => 'Mô tả sản phẩm không được để trống.'
+            'price.integer' => 'Giá sản phẩm không hợp lệ'
         ]);
 
         try {
