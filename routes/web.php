@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AdminUserController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('update');
 
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('delete');
+    });
+
+    //Users
+    Route::prefix('users')->name('users.')->group(function (){
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+
+        Route::get('/create', [AdminUserController::class, 'create'])->name('create');
+        Route::post('/store', [AdminUserController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [AdminUserController::class, 'update'])->name('update');
+
+        Route::get('/delete/{id}', [AdminUserController::class, 'delete'])->name('delete');
     });
 
     //Setting
