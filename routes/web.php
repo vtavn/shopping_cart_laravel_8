@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminRoleController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('delete');
     });
+
+    //Permission
+    Route::prefix('roles')->name('roles.')->group(function (){
+        Route::get('/', [AdminRoleController::class, 'index'])->name('index');
+
+        Route::get('/create', [AdminRoleController::class, 'create'])->name('create');
+        Route::post('/store', [AdminRoleController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [AdminRoleController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [AdminRoleController::class, 'update'])->name('update');
+
+        Route::get('/delete/{id}', [AdminRoleController::class, 'delete'])->name('delete');
+    });
 });
-
-
