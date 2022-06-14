@@ -131,6 +131,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{route('admin.users.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Danh sách tài khoản
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{route('admin.settings.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
