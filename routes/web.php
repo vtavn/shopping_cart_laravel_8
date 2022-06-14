@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,6 +82,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('delete');
     });
 
+    //Setting
+    Route::prefix('settings')->name('settings.')->group(function (){
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+
+        Route::get('/create', [SettingController::class, 'create'])->name('create');
+        Route::post('/store', [SettingController::class, 'store'])->name('store');
+
+        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('update');
+
+        Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('delete');
+    });
 });
 
 
