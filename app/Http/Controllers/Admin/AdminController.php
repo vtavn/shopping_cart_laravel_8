@@ -8,9 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    //
+
     public function index()
     {
+        if (!Auth::check())
+        {
+            return redirect()->route('admin.login');
+
+        }
         return view('admin.home');
     }
 
@@ -33,5 +38,14 @@ class AdminController extends Controller
             return redirect()->route('admin.index')->with('msg', 'Đăng nhập thành công.');
         }
         return back()->with('errors', 'Sai tên tài khoản hoặc mật khẩu.');
+    }
+
+    public function isLogin()
+    {
+        if (Auth::check())
+        {
+            return true;
+        }
+        return false;
     }
 }

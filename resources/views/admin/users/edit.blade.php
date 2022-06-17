@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Thêm Người dùng')
+@section('title', 'Sửa Người dùng')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('template_admin/plugins/select2/css/select2.min.css')}}" />
@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    @include('admin.partials.content-header', ['name' => 'Người dùng', 'key' => 'Thêm Người dùng'])
+    @include('admin.partials.content-header', ['name' => 'Người dùng', 'key' => 'Sửa Người dùng'])
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -20,7 +20,7 @@
                     @endif
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm Người dùng</h3>
+                            <h3 class="card-title">Sửa Người dùng</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">

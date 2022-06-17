@@ -13,7 +13,7 @@
                 <img src="{{asset('template_admin')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{\Auth::user()->name ?? 'Khách'}}</a>
             </div>
         </div>
 
@@ -141,9 +141,18 @@
 
                 <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Quản Lý Nhóm
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-radiation"></i>
+                        <p>
+                            Quản lý Module
                         </p>
                     </a>
                 </li>

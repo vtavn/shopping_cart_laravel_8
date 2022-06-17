@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,9 @@ Route::get('/', function () {
 });
 
 
+
 Route::prefix('admin')->name('admin.')->group(function(){
+
     Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
     Route::post('/login', [AdminController::class, 'postLoginAdmin']);
 
@@ -33,20 +37,20 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('index');
 
     //category
-    Route::prefix('categories')->name('categories.')->group(function (){
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::prefix('categories')->middleware('can:categories')->name('categories.')->group(function (){
+        Route::get('/', [CategoryController::class, 'index'])->name('index')->can('viewAny', Category::class);
 
-        Route::get('/create', [CategoryController::class, 'create'])->name('create');
-        Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::get('/create', [CategoryController::class, 'create'])->name('create')->can('create', Category::class);
+        Route::post('/store', [CategoryController::class, 'store'])->name('store')->can('create', Category::class);
 
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit')->can('update', Category::class);
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('update')->can('update', Category::class);
 
-        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('delete')->can('delete', Category::class);
     });
 
     //Menu
-    Route::prefix('menus')->name('menus.')->group(function (){
+    Route::prefix('menus')->middleware('can:menus')->name('menus.')->group(function (){
         Route::get('/', [MenuController::class, 'index'])->name('index');
 
         Route::get('/create', [MenuController::class, 'create'])->name('create');
@@ -110,7 +114,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('delete');
     });
 
-    //Permission
+    //Roles
     Route::prefix('roles')->name('roles.')->group(function (){
         Route::get('/', [AdminRoleController::class, 'index'])->name('index');
 
@@ -122,4 +126,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('/delete/{id}', [AdminRoleController::class, 'delete'])->name('delete');
     });
+
+    //Permission
+    Route::prefix('permissions')->name('permissions.')->group(function (){
+        Route::get('/', [AdminPermissionController::class, 'index'])->name('index');
+
+        Route::get('/create', [AdminPermissionController::class, 'create'])->name('create');
+        Route::post('/store', [AdminPermissionController::class, 'store'])->name('store');
+
+        Route::get('/edit/{permission}', [AdminPermissionController::class, 'edit'])->name('edit');
+        Route::post('/edit/{permission}', [AdminPermissionController::class, 'update']);
+
+        Route::get('/delete/{permission}', [AdminPermissionController::class, 'delete'])->name('delete');
+    });
+
 });
