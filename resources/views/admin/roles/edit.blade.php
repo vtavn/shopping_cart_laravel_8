@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Thêm Nhóm')
+@section('title', 'Sửa Nhóm')
 
 @section('css')
 @endsection
 
 @section('content')
-    @include('admin.partials.content-header', ['name' => 'Nhóm người dùng', 'key' => 'Thêm Nhóm'])
+    @include('admin.partials.content-header', ['name' => 'Nhóm người dùng', 'key' => 'Sửa Nhóm'])
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -19,7 +19,7 @@
 
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Thêm Nhóm</h3>
+                            <h3 class="card-title">Sửa Nhóm</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">

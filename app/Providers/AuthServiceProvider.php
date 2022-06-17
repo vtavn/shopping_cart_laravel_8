@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Permission;
+use App\Models\User;
+use App\Policies\CategoryPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Category::class => CategoryPolicy::class
     ];
 
     /**
@@ -25,6 +30,60 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $moduleLists = Permission::where('parent_id', 0)->get();
+        if ($moduleLists->count()>0)
+        {
+            foreach ($moduleLists as $module)
+            {
+                Gate::define($module->name, function (User $user) use ($module) {
+                    $permissions = Permission::where('parent_id', $module->id)->get();
+                    foreach ($permissions as $permission)
+                    {
+                        return $user->checkPermissionAccess($permission->name);
+                    }
+                    return false;
+                });
+
+                Gate::define($module->name.'.edit', function (User $user) use ($module) {
+                    $permissions = Permission::where('parent_id', $module->id)->get();
+                    foreach ($permissions as $permission)
+                    {
+                        if ($permission->name == 'edit')
+                        {
+                            return $user->checkPermissionAccess($permission->name);
+                        }
+                    }
+                    return false;
+                });
+
+//                Gate::define($module->name.'.edit', function (User $user) use ($module) {
+//                    $roleJson = $user->group->permissions;
+//                    if (!empty($roleJson)){
+//                        $roleArr = json_decode($roleJson, true);
+//                        $check = isRole($roleArr, $module->name, 'edit');
+//                        return $check;
+//                    }
+//                    return false;
+//                });
+//
+//                Gate::define($module->name.'.delete', function (User $user) use ($module) {
+//                    $roleJson = $user->group->permissions;
+//                    if (!empty($roleJson)){
+//                        $roleArr = json_decode($roleJson, true);
+//                        $check = isRole($roleArr, $module->name, 'delete');
+//                        return $check;
+//                    }
+//                    return false;
+//                });
+            }
+        }
+//        Gate::define('category_products', function ($user){
+//            return $user->checkPermissionAccess('view');
+//        });
+
+        //gate access dashboard
+        Gate::define('access-dashboard', function (User $user){
+            return true;
+        });
     }
 }
