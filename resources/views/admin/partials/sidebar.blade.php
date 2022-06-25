@@ -34,6 +34,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
 
+                @can('categories')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-stream"></i>
@@ -43,128 +44,142 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('viewAny', App\Models\Category::class)
                         <li class="nav-item">
                             <a href="{{route('admin.categories.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh Sách</p>
                             </a>
                         </li>
+                        @endcan
+                        @can('create', App\Models\Category::class)
                             <li class="nav-item">
                                 <a href="{{route('admin.categories.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Thêm mới</p>
                                 </a>
                             </li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
-                            Menu
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.menus.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.menus.create')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @can('menus')
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-bars"></i>
+                            <p>
+                                Menu
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.menus.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh Sách</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.menus.create')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm mới</p>
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+                @endcan
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-store"></i>
-                        <p>
-                            Sản Phẩm
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.products.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.products.create')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-bread-slice"></i>
-                        <p>
-                            Slider
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('admin.sliders.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.sliders.create')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('admin.users.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Danh sách tài khoản
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('admin.roles.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Quản Lý Nhóm
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-radiation"></i>
-                        <p>
-                            Quản lý Module
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('admin.settings.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            Setting
-                        </p>
-                    </a>
-                </li>
+                @can('products')
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-store"></i>
+                            <p>
+                                Sản Phẩm
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('admin.products.index')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh Sách</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.products.create')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Thêm mới</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('sliders')
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-bread-slice"></i>
+                            <p>
+                                Slider
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('admin.sliders.index')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh Sách</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.sliders.create')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Thêm mới</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('users')
+                    <li class="nav-item">
+                        <a href="{{route('admin.users.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Danh sách tài khoản
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('roles')
+                    <li class="nav-item">
+                        <a href="{{route('admin.roles.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Phân quyền
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('permissions')
+                    <li class="nav-item">
+                        <a href="{{route('admin.permissions.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-radiation"></i>
+                            <p>
+                                Quản lý Module
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('settings')
+                    <li class="nav-item">
+                        <a href="{{route('admin.settings.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>
+                                Setting
+                            </p>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

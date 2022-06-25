@@ -63,7 +63,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     //Product
-    Route::prefix('products')->name('products.')->group(function (){
+    Route::prefix('products')->middleware('can:products')->name('products.')->group(function (){
         Route::get('/', [ProductController::class, 'index'])->name('index');
 
         Route::get('/create', [ProductController::class, 'create'])->name('create');
@@ -76,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     //Slider
-    Route::prefix('sliders')->name('sliders.')->group(function (){
+    Route::prefix('sliders')->middleware('can:slider')->name('sliders.')->group(function (){
         Route::get('/', [SliderController::class, 'index'])->name('index');
 
         Route::get('/create', [SliderController::class, 'create'])->name('create');
@@ -89,7 +89,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     //Users
-    Route::prefix('users')->name('users.')->group(function (){
+    Route::prefix('users')->middleware('can:users')->name('users.')->group(function (){
         Route::get('/', [AdminUserController::class, 'index'])->name('index');
 
         Route::get('/create', [AdminUserController::class, 'create'])->name('create');
@@ -102,7 +102,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     //Setting
-    Route::prefix('settings')->name('settings.')->group(function (){
+    Route::prefix('settings')->middleware('can:settings')->name('settings.')->group(function (){
         Route::get('/', [SettingController::class, 'index'])->name('index');
 
         Route::get('/create', [SettingController::class, 'create'])->name('create');
